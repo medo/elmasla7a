@@ -16,7 +16,8 @@
     ],
     "require": {
       "php": ">=5.3.0",
-      "mthaml/mthaml": "dev-master"
+      "mthaml/mthaml": "dev-master",
+      "coffeescript/coffeescript": "dev-master"
     },
     "autoload": {
       "classmap":[
