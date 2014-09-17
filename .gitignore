@@ -1,4 +1,4 @@
 app/tmp/*
-app/vendors/*
+app/vendor/*
 app/config/database.php
 app/composer.phar
