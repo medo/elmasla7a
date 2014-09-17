@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "73dd21f70d18fc0f8a0c30f0c5aad85a",
+    "hash": "c0655f70512133db81c3e1c9cae85b15",
     "packages": [
         {
             "name": "mthaml/mthaml",
