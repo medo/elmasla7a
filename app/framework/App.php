@@ -31,7 +31,7 @@ class App{
     $controller = $route[0]."Controller";
     $action = $route[1]."Action";
     if( class_exists($controller) ){
-      $controllerInstance = new $controller($this->config, $_REQUEST, $format);
+      $controllerInstance = new $controller($this->config, $_REQUEST, $controller,$action, $format);
     }else{
       return "CONTROLLER \"$controller\" NOT FOUND";
     }
