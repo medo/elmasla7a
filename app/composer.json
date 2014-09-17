@@ -1,0 +1,21 @@
+{
+    "name": "medo/elmasla7a",
+    "authors": [
+        {
+            "name": "almgohar",
+            "email": "almgohar@gmail.com"
+        },
+        {
+          "name": "MohamedBassem",
+          "email": "medoox240@gmail.com"
+        },
+        {
+          "name": "medo",
+          "email": "mohamed@farghal.com"
+        }
+    ],
+    "require": {
+      "php": ">=5.3.0",
+      "mthaml/mthaml": "dev-master"
+    }
+}
