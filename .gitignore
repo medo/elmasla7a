@@ -1,0 +1,4 @@
+app/tmp/*
+app/vendors/*
+app/config/database.php
+app/composer.phar
