@@ -8,27 +8,30 @@ class App{
     $this->routes = $routes;
   }
   
-  function resolveRoutes(){
-    $pathInfo = $_SERVER["PATH_INFO"];
+  function resolveRoutes($pathInfo, $method, $format){
     if( $pathInfo == "" ) $pathInfo = "/";
-    $pathInfo .= "__".$_SERVER["REQUEST_METHOD"];
+    $pathInfo .= "__".$method."__".$format;
     if( array_key_exists($pathInfo, $this->routes) ){
       return $this->routes[$pathInfo];
     }else{
-      return NULL;
+      return [NULL, $pathInfo];
     }
   }
 
 
   function run(){
-    $route = $this->resolveRoutes();
-    if( $route == NULL ){
-      return "ROUTE NOT FOUND";
+    $pathInfo = $_SERVER["PATH_INFO"];
+    $requestMethod = $_SERVER["REQUEST_METHOD"];
+    $format = isset($_REQUEST["format"]) ? $_REQUEST["format"] : "html";
+    $route = $this->resolveRoutes($pathInfo, $requestMethod, $format);
+
+    if( $route[0] == NULL ){
+      return "ROUTE ".$route[1]." NOT FOUND";
     }
     $controller = $route[0]."Controller";
     $action = $route[1]."Action";
     if( class_exists($controller) ){
-      $controllerInstance = new $controller($this->config, $_REQUEST);
+      $controllerInstance = new $controller($this->config, $_REQUEST, $format);
     }else{
       return "CONTROLLER \"$controller\" NOT FOUND";
     }

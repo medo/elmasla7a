@@ -8,8 +8,8 @@ class Routes{
     return self::$routes;
   }
 
-  public function addRoute($path, $httpMethod, $controller, $action){
-    self::$routes[$path."__".$httpMethod] = [ $controller, $action ]; 
+  public function addRoute($path, $httpMethod, $controller, $action, $format = "html"){
+    self::$routes[$path."__".$httpMethod."__".$format] = [ $controller, $action ];
   }
 }
 
