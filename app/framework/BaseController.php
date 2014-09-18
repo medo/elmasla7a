@@ -14,6 +14,8 @@ class BaseController{
 
   function render($templateName, $variables = [], $inLayout = true){
 
+    $variables["DOCUMENT_ROOT"] = $_SERVER['DOCUMENT_ROOT'];
+
     if( $templateName[0] == "/" ){
       $templatePath = $_SERVER['DOCUMENT_ROOT']."/app/views".$templateName;
     }else{
