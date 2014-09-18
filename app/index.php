@@ -1,6 +1,5 @@
 <?php
 require_once("config/database.php");
-require_once("vendor/autoload.php");
 
 function connectToDatabase(){
   $con = mysqli_connect($DATABASE_SERVER_HOST, $DATABASE_SERVER_USERNAME, $DATABASE_SERVER_PASSWORD, $DATABASE_NAME); 

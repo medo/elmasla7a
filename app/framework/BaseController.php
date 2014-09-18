@@ -17,7 +17,7 @@ class BaseController{
     if( $templateName[0] == "/" ){
       $templatePath = $_SERVER['DOCUMENT_ROOT']."/app/views".$templateName;
     }else{
-      $templatePath = $_SERVER['DOCUMENT_ROOT']."/app/views/".$this->controller."/".$this->action."/".$templateName;
+      $templatePath = $_SERVER['DOCUMENT_ROOT']."/app/views/".$this->controller."/".$templateName;
     }
 
     if( $this->format == "html" ){
