@@ -8,7 +8,10 @@ if ($path["extension"] == "coffee") {
   $js = CoffeeScript\Compiler::compile($coffee, array('filename' => $filepath));
   echo $js;
 }else if($path["extension"] == "scss") {
-  return false;
+  $filepath = $path["dirname"]."/".$path["basename"];
+  $scss_code = file_get_contents($filepath);
+  $scss = new scssc();
+  echo $scss->compile($scss_code);
 }else{
   return false;
 }
