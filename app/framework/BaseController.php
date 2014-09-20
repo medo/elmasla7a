@@ -58,11 +58,10 @@ abstract class BaseController{
   }
 
   private function authenticateUser(){
-    if( isset($_SESSION['userId']) && isset($_SESSION['sessionHash']) ){
+    if( isset($_SESSION['userId'])){
       $userId = $_SESSION['userId'];
-      $sessionHash = $_SESSION['sessionHash'];
       $user = Users::findById($userId);
-      if( $user && md5($userId.$user->passwod.$randomHash) == $sessionHash ){
+      if( $user ){
         $this->_user = $user;
       }else{
         $this->_isGuest = true;
@@ -81,8 +80,6 @@ abstract class BaseController{
   }
 
   function signInuser($userId){
-    $user = Users::findById($userId);
-    $_SESSION['sessionHash'] = md5($userId.$user->passwod.$randomHash);
     $_SESSION['userId'] = $userId;
   }
 
