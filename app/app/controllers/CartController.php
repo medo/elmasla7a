@@ -10,7 +10,7 @@ class CartController extends BaseController{
 
   }
 
-  function viewHistoryAction() {
+  function historyAction() {
 
   }
 }
