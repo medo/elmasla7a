@@ -83,7 +83,7 @@ abstract class BaseController{
     $_SESSION['userId'] = $userId;
   }
 
-  private function run($action){
+  function run($action){
     $this->authenticateUser();
     return $this->$action();
   }
