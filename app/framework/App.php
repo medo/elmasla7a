@@ -38,6 +38,7 @@ class App{
     if( !method_exists( $controllerInstance, $action ) ){
       return "ACTION \"$action\" NOT FOUND";
     }
-    return $controllerInstance->$action();
+
+    return $controllerInstance->run($action);
   }
 }

@@ -1,6 +1,8 @@
 <?php
 
-class BaseController{
+abstract class BaseController{
+
+  static $randomHash = "ASDA<MNCKASJHDASLKJCm23asd;la";
 
   function __construct($config, $params, $controller, $action, $format){
     $this->config = $config;
@@ -53,5 +55,39 @@ class BaseController{
     }else{
       return "UNKNOWN FORMAT ".$this->format;
     }
+  }
+
+  private function authenticateUser(){
+    if( isset($_SESSION['userId']) && isset($_SESSION['sessionHash']) ){
+      $userId = $_SESSION['userId'];
+      $sessionHash = $_SESSION['sessionHash'];
+      $user = Users::findById($userId);
+      if( $user && md5($userId.$user->passwod.$randomHash) == $sessionHash ){
+        $this->_user = $user;
+      }else{
+        $this->_isGuest = true;
+      }
+    }else{
+      $this->_isGuest = true;
+    }
+  }
+
+  function signedInUser(){
+    return $this->_user;
+  }
+
+  function isGuest(){
+    return $this->_isGuest == true;
+  }
+
+  function signInuser($userId){
+    $user = Users::findById($userId);
+    $_SESSION['sessionHash'] = md5($userId.$user->passwod.$randomHash);
+    $_SESSION['userId'] = $userId;
+  }
+
+  private function run($action){
+    $this->authenticateUser();
+    return $this->$action();
   }
 }
