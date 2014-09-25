@@ -14,12 +14,12 @@ class BaseModel {
         $this->data = array();
     }
 
-    function set($key, $value) {
+    function __set($key, $value) {
         $this->data[$key] = $value;
         $this->updated[$key] = true;
     }
 
-    function get($key) {
+    function __get($key) {
         return isset($this->data[$key])? $this->data[$key] : null;
     }
 
