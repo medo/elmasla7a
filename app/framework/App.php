@@ -1,11 +1,12 @@
 <?php
 
-class App{
+class App {
 
   function __construct($con, $config, $routes){
     $this->con = $con;
     $this->config = $config;
     $this->routes = $routes;
+    BaseModel::$con = $con;
   }
   
   function resolveRoutes($pathInfo, $method, $format){
