@@ -14,6 +14,15 @@ abstract class BaseController{
     $this->layout = "base_layout.html.haml";
   }
 
+  function renderPartial($templateName, $variables = []){
+    return $this->render($templateName, $variables, false);
+  }
+
+  function redirect($controller, $action){
+    header("Location: ".Routes::getPath($controller, $action));
+    die();
+  }
+
   function render($templateName, $variables = [], $inLayout = true){
 
     $variables["DOCUMENT_ROOT"] = $_SERVER['DOCUMENT_ROOT'];
@@ -87,4 +96,5 @@ abstract class BaseController{
     $this->authenticateUser();
     return $this->$action();
   }
+
 }
