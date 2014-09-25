@@ -94,7 +94,7 @@ abstract class BaseController{
 
   function run($action){
     $this->authenticateUser();
-    return $this->$action();
+    return $this->$action($this->params);
   }
 
 }
