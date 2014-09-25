@@ -2,15 +2,15 @@
 
 class UserController extends BaseController{
 
-  function registerAction() {
+  function registerAction(String $firstName, String $lastName, String $email, String $password) {
+  	
+  }
+
+  function loginAction(String $email, String $password) {
 
   }
 
-  function loginAction() {
-
-  }
-
-  function logoutAction() {
+  function logoutAction(int $userId) {
 
   }
 }
