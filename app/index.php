@@ -2,7 +2,8 @@
 require_once("config/database.php");
 
 function connectToDatabase(){
-  $con = mysqli_connect($DATABASE_SERVER_HOST, $DATABASE_SERVER_USERNAME, $DATABASE_SERVER_PASSWORD, $DATABASE_NAME); 
+  $con = mysqli_connect($GLOBALS['DATABASE_SERVER_HOST'], $GLOBALS['DATABASE_SERVER_USERNAME'],
+      $GLOBALS['DATABASE_SERVER_PASSWORD'], $GLOBALS['DATABASE_NAME']);
   if( mysqli_connect_errno() ) {
     die("Failed to connect to MySQL: " . mysqli_connect_error());
   }
