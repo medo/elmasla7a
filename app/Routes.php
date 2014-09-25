@@ -2,14 +2,20 @@
 
 class Routes{
 
-  private static $routes = array(); 
+  private static $routes = array();
+  private static $routes_inverse = array();
 
   public static function getRoutes(){
     return self::$routes;
   }
 
+  public static function getPath($controller, $action){
+    return $_SERVER['REMOTE_HOST'].self::$routes_inverse[$controller."_".$action];
+  }
+
   public function addRoute($path, $httpMethod, $controller, $action, $format = "html"){
     self::$routes[$path."__".$httpMethod."__".$format] = [ $controller, $action ];
+    self::$routes_inverse[$controller."_".$action] = $path;
   }
 }
 

@@ -1,6 +1,8 @@
 <?php
 
-class BaseController{
+abstract class BaseController{
+
+  static $randomHash = "ASDA<MNCKASJHDASLKJCm23asd;la";
 
   function __construct($config, $params, $controller, $action, $format){
     $this->config = $config;
@@ -10,6 +12,15 @@ class BaseController{
     $this->format = $format;
 
     $this->layout = "base_layout.html.haml";
+  }
+
+  function renderPartial($templateName, $variables = []){
+    return $this->render($templateName, $variables, false);
+  }
+
+  function redirect($controller, $action){
+    header("Location: ".Routes::getPath($controller, $action));
+    die();
   }
 
   function render($templateName, $variables = [], $inLayout = true){
@@ -54,4 +65,36 @@ class BaseController{
       return "UNKNOWN FORMAT ".$this->format;
     }
   }
+
+  private function authenticateUser(){
+    if( isset($_SESSION['userId'])){
+      $userId = $_SESSION['userId'];
+      $user = Users::findById($userId);
+      if( $user ){
+        $this->_user = $user;
+      }else{
+        $this->_isGuest = true;
+      }
+    }else{
+      $this->_isGuest = true;
+    }
+  }
+
+  function signedInUser(){
+    return $this->_user;
+  }
+
+  function isGuest(){
+    return $this->_isGuest == true;
+  }
+
+  function signInuser($userId){
+    $_SESSION['userId'] = $userId;
+  }
+
+  function run($action){
+    $this->authenticateUser();
+    return $this->$action();
+  }
+
 }
