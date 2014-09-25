@@ -27,6 +27,7 @@ class TransactionController extends BaseController{
 
   function historyAction(int $userId) {
     $boughtItems = Transaction::findById(array("userId" => $userId, "bought" => true));
+    
     return $this->render("history.html.haml", array("boughtItems" => $boughtItems));
   }
 }

@@ -88,7 +88,7 @@ abstract class BaseController{
     return $this->_isGuest == true;
   }
 
-  function signInuser($userId){
+  function signInUser($userId){
     $_SESSION['userId'] = $userId;
   }
 

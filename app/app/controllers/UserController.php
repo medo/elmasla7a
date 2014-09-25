@@ -14,16 +14,20 @@ class UserController extends BaseController{
     $user->setPassword(md5($password));
     $user->save();
     $this->signInuser($user->getId());
+    
     return $this->redirect("Site", "index");
   }
 
-  function loginAction(String $email, String $password) {
-
+  function loginAction($params) {
+    $user = $this->signedInUser();
+    $this->signInUser($user->getId());
+    
     return $this->redirect("Site", "index");
   }
 
-  function logoutAction(int $userId) {
-
+  function logoutAction($params) {
+    $_SESSION['userId'] = null;
+    
     return $this->redirect("Site", "index");
   }
 }
