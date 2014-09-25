@@ -24,6 +24,8 @@
       "classmap":[
         "./framework",
         "./app",
+        "./app/controllers",
+        "./app/models",
         "."
       ]
     }
