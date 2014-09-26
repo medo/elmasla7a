@@ -18,6 +18,28 @@ class UserController extends BaseController{
     return $this->redirect("Site", "index");
   }
 
+  function editAction($params) {
+    $user = $this->signedInUser();
+    $firstName = $user->getFirstName();
+    $lastName = $user->getLastName();
+    $email = $user->getEmail();
+
+    return $this->render("edit.html.haml", 
+      array("firstName"=>$firstName,"lastName"=>$lastName,"email"=>$email));
+  }
+
+  function saveAction($params) {
+    $user = $this->signedInUser();
+    $user->setFirstName(($params["firstName"])? $user->getFirstName() : $params["firstName"]);
+    $user->setLastName(($params["lastName"])? $user->getLastName() : $params["lastName"]);
+    $user->setEmail(($params["email"])? $user->getEmail() : $params["email"]);
+    $user->setPassword(($params["password"])? $user->getpassword() : md5($params["password"]));
+    $user->save();
+
+    return $this->redirect("Site", "index");
+
+  }
+
   function loginAction($params) {
     $email = $params["email"];
     $password = md5($params["password"]);
