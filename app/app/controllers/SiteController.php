@@ -14,4 +14,11 @@ class SiteController extends BaseController{
     return $this->render("register.html.haml");
   }
 
+  function loginAction(){
+    if(!$this->isGuest()){
+      $this->redirect("Site","index");
+    }
+    return $this->render("login.html.haml");
+  }
+
 }

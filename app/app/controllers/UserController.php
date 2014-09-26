@@ -7,13 +7,15 @@ class UserController extends BaseController{
     $lastName = $params["lastName"];
     $email = $params["email"];
     $password = $params["password"];
+    $profilePicturePath = $params["profilePicturePath"];
   	$user = new User();
     $user->firstName = $firstName;
     $user->lastName = $lastName;
     $user->email = $email;
     $user->password = md5($password);
+    $user->profilePicturePath = $profilePicturePath;
     $user->save();
-    $this->signInUser($user->getId());
+    $this->signInUser($user->Id);
     
     return $this->redirect("Site", "index");
   }
@@ -23,17 +25,20 @@ class UserController extends BaseController{
     $firstName = $user->firstName;
     $lastName = $user->lastName;
     $email = $user->email;
+    $profilePicturePath = $user->profilePicturePath;
 
     return $this->render("edit.html.haml", 
-      array("firstName"=>$firstName,"lastName"=>$lastName,"email"=>$email));
+      array("firstName"=>$firstName,"lastName"=>$lastName,
+        "email"=>$email, "profilePicturePath" => $profilePicturePath));
   }
 
   function saveAction($params) {
     $user = $this->signedInUser();
-    $user->firstName = ($params["firstName"])? $user->firstName : $params["firstName"];
-    $user->lastName = ($params["lastName"])? $user->lastName : $params["lastName"];
-    $user->email = ($params["email"])? $user->email : $params["email"];
-    $user->password = ($params["password"])? $user->password : md5($params["password"]);
+    $user->firstName = ($params["firstName"] == "")? $user->firstName : $params["firstName"];
+    $user->lastName = ($params["lastName"] == "")? $user->lastName : $params["lastName"];
+    $user->email = ($params["email"] == "")? $user->email : $params["email"];
+    $user->profilePicturePath = ($params["profilePicturePath"] == "")? $user->profilePicturePath : $params["profilePicturePath"];
+    $user->password = ($params["password"] == "")? $user->password : md5($params["password"]);
     $user->save();
 
     return $this->redirect("Site", "index");
@@ -43,13 +48,16 @@ class UserController extends BaseController{
   function loginAction($params) {
     $email = $params["email"];
     $password = md5($params["password"]);
-    $user = User::model()->findById(array("email", $email));
-    if(($user!= null) 
-      && ($user->password == $password) ){
+    $user = User::model()->findOne(array("email" => $email, "password" => $password));
+    if($user!= null){
       $this->signInUser($user->id);
+     return $this->redirect("Site", "index");
+    } else {
+      $message = true;
+      return $this->redirect("Site", "index");
     }
     
-    return $this->redirect("Site", "index");
+   
   }
 
   function logoutAction($params) {

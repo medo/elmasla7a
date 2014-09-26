@@ -3,7 +3,7 @@
 class User extends BaseModel {
   
   function __construct() {
-    parent::__construct("users", self::class);
+    parent::__construct("users", "User");
   }
 
   public static function model(){

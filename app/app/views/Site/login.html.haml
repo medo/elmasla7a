@@ -1,0 +1,11 @@
+%h1
+  = "Login"
+%hr
+%form{"method"=>"POST", "action" => "#{$controller->getPath("User","login",false)}"}
+  %label.control-label Email
+  %input{"required" =>"true", "type" => "textbox", "placeholder" => "john@doe.com", "name" => "email"}
+  %hr
+  %label.control-label Password
+  %input{"required" =>"true", "type" => "password", "name" => "password"} 
+  %hr
+  %input.btn.btn-success{"type" => "submit", "value" => "login"}

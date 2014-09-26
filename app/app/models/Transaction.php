@@ -3,7 +3,7 @@
 class Transaction extends BaseModel {
 
   function __construct() {
-    parent::__construct("transactions", self::class);
+    parent::__construct("transactions", "Transaction");
   }
 
   public static function model(){
