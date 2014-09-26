@@ -13,14 +13,19 @@ class UserController extends BaseController{
     $user->setEmail($email);
     $user->setPassword(md5($password));
     $user->save();
-    $this->signInuser($user->getId());
+    $this->signInUser($user->getId());
     
     return $this->redirect("Site", "index");
   }
 
   function loginAction($params) {
-    $user = $this->signedInUser();
-    $this->signInUser($user->getId());
+    $email = $params["email"];
+    $password = md5($params["password"]);
+    $user = User::findById(array("email", $email));
+    if(($user!= null) 
+      && ($user->getPassword() == $password) {
+      $this->signInUser($user->getId());
+    }
     
     return $this->redirect("Site", "index");
   }
