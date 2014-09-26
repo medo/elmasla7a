@@ -25,6 +25,7 @@ class Routes{
 
 Routes::addRoute("/", "GET", "Site", "index");
 Routes::addRoute("/login", "GET", "Site", "login");
+Routes::addRoute("/register", "GET", "Site", "register");
 Routes::addRoute("/cart/buy", "GET", "Transaction", "buy");
 Routes::addRoute("/cart/checkout", "POST", "Transaction", "checkout");
 Routes::addRoute("/cart/history", "GET", "Transaction", "history");

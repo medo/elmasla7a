@@ -7,4 +7,11 @@ class SiteController extends BaseController{
     return $this->render("index.html.haml", array("items" => $items));
   }
 
+  function registerAction(){
+    if(!$this->isGuest()){
+      $this->redirect("Site","index");
+    }
+    return $this->render("register.html.haml");
+  }
+
 }
