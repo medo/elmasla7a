@@ -11,11 +11,11 @@ class Transaction extends BaseModel {
   }
 
   public function getUser(){
-    return User::find($this->getUserId());
+    return User::model()->find($this->userId);
   }
 
   public function getItem(){
-    return Item::find($this->getItemId());
+    return Item::model()->find($this->itemId);
   }
 
 }

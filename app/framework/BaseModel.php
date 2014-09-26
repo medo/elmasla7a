@@ -34,7 +34,7 @@ abstract class BaseModel {
     }
     $columns = implode(',', array_keys($this->data));
     $values = array_map(function($key){
-      return $this->data[$key]; 
+      return $this->escape($this->data[$key]); 
     },array_keys($this->data));
     $values = implode(",", $values);
     $formatQuery = "INSERT INTO %s (%s) VALUES (%s)";

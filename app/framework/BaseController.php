@@ -73,7 +73,7 @@ abstract class BaseController{
   private function authenticateUser(){
     if( isset($_SESSION['userId'])){
       $userId = $_SESSION['userId'];
-      $user = Users::findById($userId);
+      $user = User::model()->find($userId);
       if( $user ){
         $this->_user = $user;
       }else{

@@ -30,11 +30,13 @@ class TransactionController extends BaseController{
     return $this->redirect("Site", "index");
   }
 
-  function historyAction(int $userId) {
+  function historyAction() {
+    $userId = $this->signedInUser()->id;
     if($this->isGuest()){
       $this->redirect("Site","login");
     }
-    $boughtItems = Transaction::model()->findById(array("userId" => $userId, "bought" => true));
-    return $this->render("history.html.haml", array("boughtItems" => $boughtItems));
+    $boughtItems = Transaction::model()->findAll(array("userId" => $userId));
+    $items = array_map(function($tran){ return $tran->getItem(); }, $boughtItems);
+    return $this->render("history.html.haml", array("items" => $items));
   }
 }
