@@ -18,6 +18,10 @@ abstract class BaseController{
     return $this->render($templateName, $variables, false);
   }
 
+  function getPath($controller, $action){
+    return Routes::getPath($controller, $action, false);
+  }
+
   function redirect($controller, $action){
     header("Location: ".Routes::getPath($controller, $action));
     die();

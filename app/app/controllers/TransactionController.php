@@ -4,7 +4,6 @@ class TransactionController extends BaseController{
 
   function buyAction($params) {
     $itemId = $params["itemId"];
-    $userId = $this->signedInUser()->id;
     $item = Item::model()->findById(array("id" => $itemId));
   	
     if($item->quantity != 0) {  
