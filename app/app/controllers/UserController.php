@@ -33,7 +33,7 @@ class UserController extends BaseController{
     $user->firstName = ($params["firstName"])? $user->firstName : $params["firstName"];
     $user->lastName = ($params["lastName"])? $user->lastName : $params["lastName"];
     $user->email = ($params["email"])? $user->email : $params["email"];
-    $user->password = ($params["password"])? $user->getpassword() : md5($params["password"]);
+    $user->password = ($params["password"])? $user->password : md5($params["password"]);
     $user->save();
 
     return $this->redirect("Site", "index");
@@ -43,10 +43,10 @@ class UserController extends BaseController{
   function loginAction($params) {
     $email = $params["email"];
     $password = md5($params["password"]);
-    $user = User::findById(array("email", $email));
+    $user = User::model()->findById(array("email", $email));
     if(($user!= null) 
-      && ($user->password == $password) {
-      $this->signInUser($user->getId());
+      && ($user->password == $password) ){
+      $this->signInUser($user->id);
     }
     
     return $this->redirect("Site", "index");
@@ -54,7 +54,6 @@ class UserController extends BaseController{
 
   function logoutAction($params) {
     $_SESSION['userId'] = null;
-    
     return $this->redirect("Site", "index");
   }
 }
