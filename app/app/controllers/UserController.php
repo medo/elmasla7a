@@ -8,10 +8,10 @@ class UserController extends BaseController{
     $email = $params["email"];
     $password = $params["password"];
   	$user = new User();
-    $user->setFirstName($firstName);
-    $user->setLastName($lastName);
-    $user->setEmail($email);
-    $user->setPassword(md5($password));
+    $user->firstName = $firstName;
+    $user->lastName = $lastName;
+    $user->email = $email;
+    $user->password = md5($password);
     $user->save();
     $this->signInUser($user->getId());
     
@@ -20,9 +20,9 @@ class UserController extends BaseController{
 
   function editAction($params) {
     $user = $this->signedInUser();
-    $firstName = $user->getFirstName();
-    $lastName = $user->getLastName();
-    $email = $user->getEmail();
+    $firstName = $user->firstName;
+    $lastName = $user->lastName;
+    $email = $user->email;
 
     return $this->render("edit.html.haml", 
       array("firstName"=>$firstName,"lastName"=>$lastName,"email"=>$email));
@@ -30,10 +30,10 @@ class UserController extends BaseController{
 
   function saveAction($params) {
     $user = $this->signedInUser();
-    $user->setFirstName(($params["firstName"])? $user->getFirstName() : $params["firstName"]);
-    $user->setLastName(($params["lastName"])? $user->getLastName() : $params["lastName"]);
-    $user->setEmail(($params["email"])? $user->getEmail() : $params["email"]);
-    $user->setPassword(($params["password"])? $user->getpassword() : md5($params["password"]));
+    $user->firstName = ($params["firstName"])? $user->firstName : $params["firstName"];
+    $user->lastName = ($params["lastName"])? $user->lastName : $params["lastName"];
+    $user->email = ($params["email"])? $user->email : $params["email"];
+    $user->password = ($params["password"])? $user->getpassword() : md5($params["password"]);
     $user->save();
 
     return $this->redirect("Site", "index");
@@ -45,7 +45,7 @@ class UserController extends BaseController{
     $password = md5($params["password"]);
     $user = User::findById(array("email", $email));
     if(($user!= null) 
-      && ($user->getPassword() == $password) {
+      && ($user->password == $password) {
       $this->signInUser($user->getId());
     }
     

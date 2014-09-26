@@ -15,10 +15,10 @@ class TransactionController extends BaseController{
   function checkoutAction($params) {
     $userId = $this->signedInUser()->getId();
   	$item = $params["item"];
-    $item->setQuantity($item->getQuantity()--);
+    $item->Quantity--;
     $transaction = new Transaction();
-    $transaction->setUserId($userId);
-    $transaction->setItemId($item->getId());
+    $transaction->userId = $userId;
+    $transaction->itemId = $item->id;
     $transaction->save();
     $item->save();
     
