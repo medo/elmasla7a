@@ -2,22 +2,37 @@
 
 class UserController extends BaseController{
 
-  function registerAction(String $name, String $email, String $password) {
+  function registerAction($params) {
+    $firstName = $params["firstName"];
+    $lastName = $params["lastName"];
+    $email = $params["email"];
+    $password = $params["password"];
   	$user = new User();
-    $user->setName($name);
+    $user->setFirstName($firstName);
+    $user->setLastName($lastName);
     $user->setEmail($email);
-    $user->setPassword(hash("md5",$password,false));
+    $user->setPassword(md5($password));
     $user->save();
-    return $this->redirect(UserController, login);
-  }
-
-  function loginAction(String $email, String $password) {
+    $this->signInUser($user->getId());
     
-    return $this->redirect(SiteController, index);
+    return $this->redirect("Site", "index");
   }
 
-  function logoutAction(int $userId) {
+  function loginAction($params) {
+    $email = $params["email"];
+    $password = md5($params["password"]);
+    $user = User::findById(array("email", $email));
+    if(($user!= null) 
+      && ($user->getPassword() == $password) {
+      $this->signInUser($user->getId());
+    }
+    
+    return $this->redirect("Site", "index");
+  }
 
-    return $this->redirect(SiteController, index);
+  function logoutAction($params) {
+    $_SESSION['userId'] = null;
+    
+    return $this->redirect("Site", "index");
   }
 }
