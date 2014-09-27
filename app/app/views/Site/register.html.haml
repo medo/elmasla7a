@@ -1,0 +1,23 @@
+%h1
+  = "Register"
+%hr
+-if($message)
+  %h4.text-center
+    This email has already been used.
+%form{"method"=>"POST", "action" => "#{$controller->getPath("Site","postRegister",false)}"}
+  %label.control-label First Name
+  %input{"required" =>"true", "type" => "textbox", "placeholder" => "john", "name" => "firstName"}
+  %hr
+  %label.control-label Last Name
+  %input{"required" =>"true", "type" => "textbox", "placeholder" => "doe", "name" => "lastName"}
+  %hr
+  %label.control-label Email
+  %input{"required" =>"true", "type" => "textbox", "placeholder" => "john@doe.com", "name" => "email"}
+  %hr
+  %label.control-label Password
+  %input{"required" =>"true", "type" => "password", "name" => "password"} 
+  %hr
+  %label.control-label Profile Picture Path
+  %input{"type" => "textbox", "placeholder" => "this/is/my/image/path/doe.jpg", "name" => "profilePicturePath"}
+  %hr
+  %input.btn.btn-success{"type" => "submit", "value" => "Register"}
