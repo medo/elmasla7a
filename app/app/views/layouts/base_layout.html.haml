@@ -6,6 +6,12 @@
     %link{"rel" => "stylesheet", "type" => "text/css", "href" => "/assets/stylesheets/main.css.scss"}
     %title El Msl7a
   %body
+    .container
+      .pull-right
+        - if ($controller->isGuest())
+          %a{:href => "/login"} = 'Sign in'
+        - else
+          %a{:href => "/user/logout"} = 'Sign out'
     = $layoutContent
     %script{"src" => "/assets/javascript/bootstrap.min.js"}
     %script{"src" => "/assets/javascript/jquery-2.1.1.min.js"}
