@@ -22,7 +22,8 @@ class UserController extends BaseController{
     $user->profilePicturePath = $params["profilePicturePath"];
     $user->password = ($params["password"] == "")? $user->password : md5($params["password"]);
     $user->save();
-
+    
+    $this->addFlash("Your Info has been saved successfully!");
     return $this->redirect("User", "edit");
 
   }

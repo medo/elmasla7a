@@ -1,6 +1,9 @@
 %h1
   = "Edit Your Information"
 %hr
+.div.row.text-center
+  %img.col-md-4.col-md-offset-4{ "src" => "#{$profilePicturePath}" }
+%br
 %form.row.text-center{"method"=>"POST", "action" => "#{$controller->getPath("User","save",false)}"}
   .row.form-group.col-md-4.col-md-offset-4
     %input.form-control{"required" =>"true", "type" => "textbox", "placeholder" => "First Name", "name" => "firstName", "value" => "#{$firstName}"}
