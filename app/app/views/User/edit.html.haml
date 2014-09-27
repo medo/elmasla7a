@@ -1,20 +1,16 @@
 %h1
   = "Edit Your Information"
 %hr
-%form{"method"=>"POST", "action" => "#{$controller->getPath("User","save",false)}"}
-  %label.control-label First Name
-  %input{"type" => "textbox", "placeholder" => "#{$firstName}", "name" => "firstName"}
-  %hr
-  %label.control-label Last Name
-  %input{"type" => "textbox", "placeholder" => "#{$lastName}", "name" => "lastName"}
-  %hr
-  %label.control-label Email
-  %input{"type" => "textbox", "placeholder" => "#{$email}", "name" => "email"}
-  %hr
-  %label.control-label Password
-  %input{"type" => "password", "name" => "password"} 
-  %hr
-  %label.control-label Profile Picture Path
-  %input{"placeholder" => "#{$profilePicturePath}", "name" => "profilePicturePath"}
-  %hr
-  %input.btn.btn-success{"type" => "submit", "value" => "Save"}
+%form.row.text-center{"method"=>"POST", "action" => "#{$controller->getPath("User","save",false)}"}
+  .row.form-group.col-md-4.col-md-offset-4
+    %input.form-control{"required" =>"true", "type" => "textbox", "placeholder" => "First Name", "name" => "firstName", "value" => "#{$firstName}"}
+  .row.form-group.col-md-4.col-md-offset-4
+    %input.form-control{"required" =>"true", "type" => "textbox", "placeholder" => "Last Name", "name" => "lastName", "value" => "#{$lastName}"}
+  .row.form-group.col-md-4.col-md-offset-4
+    %input.form-control{"required" =>"true", "type" => "textbox", "placeholder" => "Email", "name" => "email", "value" => "#{$email}"}
+  .row.form-group.col-md-4.col-md-offset-4
+    %input.form-control{"type" => "password", "name" => "password", "placeholder" => "Password" } 
+  .row.form-group.col-md-4.col-md-offset-4
+    %input.form-control{"type" => "textbox", "placeholder" => "Profile Picture Path", "name" => "profilePicturePath", "value" => "#{$profilePicturePath}"}
+  .row.form-group.col-md-4.col-md-offset-4
+    %input.btn.btn-success{"type" => "submit", "value" => "Save"}

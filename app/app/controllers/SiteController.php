@@ -36,7 +36,7 @@ class SiteController extends BaseController{
     $user->password = md5($password);
     $user->profilePicturePath = $profilePicturePath;
     $user->save();
-      $this->signInUser($user->Id);
+      $this->signInUser($user->id);
       return $this->redirect("Site", "index");
     }else{
       $message = true;

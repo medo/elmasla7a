@@ -40,6 +40,7 @@ abstract class BaseModel {
     $formatQuery = "INSERT INTO %s (%s) VALUES (%s)";
     $query = sprintf($formatQuery, $this->table, $columns,  $values);
     $result = $this->con_->query($query);
+    $this->id = $this->con_->insert_id;
     return $result;
   }
 

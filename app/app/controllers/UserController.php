@@ -19,11 +19,11 @@ class UserController extends BaseController{
     $user->firstName = ($params["firstName"] == "")? $user->firstName : $params["firstName"];
     $user->lastName = ($params["lastName"] == "")? $user->lastName : $params["lastName"];
     $user->email = ($params["email"] == "")? $user->email : $params["email"];
-    $user->profilePicturePath = ($params["profilePicturePath"] == "")? $user->profilePicturePath : $params["profilePicturePath"];
+    $user->profilePicturePath = $params["profilePicturePath"];
     $user->password = ($params["password"] == "")? $user->password : md5($params["password"]);
     $user->save();
 
-    return $this->redirect("Site", "index");
+    return $this->redirect("User", "edit");
 
   }
 
