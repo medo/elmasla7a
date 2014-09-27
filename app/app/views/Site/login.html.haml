@@ -1,7 +1,10 @@
 %h1
   = "Login"
 %hr
-%form{"method"=>"POST", "action" => "#{$controller->getPath("User","login",false)}"}
+-if($message)
+  %h4.text-center
+    Wrong credentials.
+%form{"method"=>"POST", "action" => "#{$controller->getPath("Site","postLogin",false)}"}
   %label.control-label Email
   %input{"required" =>"true", "type" => "textbox", "placeholder" => "john@doe.com", "name" => "email"}
   %hr

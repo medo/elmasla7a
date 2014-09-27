@@ -1,7 +1,10 @@
 %h1
   = "Register"
 %hr
-%form{"method"=>"POST", "action" => "#{$controller->getPath("User","register",false)}"}
+-if($message)
+  %h4.text-center
+    This email has already been used.
+%form{"method"=>"POST", "action" => "#{$controller->getPath("Site","postRegister",false)}"}
   %label.control-label First Name
   %input{"required" =>"true", "type" => "textbox", "placeholder" => "john", "name" => "firstName"}
   %hr
