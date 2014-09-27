@@ -7,12 +7,22 @@
     %title El Msl7a
   %body
     .container
-      .pull-right
-        - if ($controller->isGuest())
-          %a{:href => "/login"} = 'Sign in'
-        - else
-          %a{:href => "/user/logout"} = 'Sign out'
-    = $layoutContent
+      %nav{:class => "navbar navbar-default", :role => "navigation"}
+        .container-fluid
+          %ul.nav.navbar-nav
+            %li
+              %a{:href => '/'} Home
+            - if (!$controller->isGuest())
+              %li
+                %a{:href => '/cart/history'} Transactions
+          .pull-right.mts
+            - if ($controller->isGuest())
+              %a{:href => "/login"} = 'Sign in'
+            - else
+              %a{:href => "/user/logout"} = "Sign out ($controller->signedInUser()->firstname)"
+      .container-fluid
+        = $layoutContent
+
     %script{"src" => "/assets/javascript/jquery-2.1.1.min.js"}
     %script{"src" => "/assets/javascript/bootstrap.min.js"}
     %script{"src" => "/assets/javascript/main.js.coffee"}
