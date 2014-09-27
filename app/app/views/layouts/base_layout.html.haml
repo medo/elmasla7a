@@ -6,6 +6,13 @@
     %link{"rel" => "stylesheet", "type" => "text/css", "href" => "/assets/stylesheets/main.css.scss"}
     %title El Msl7a
   %body
+    -if(isset($_SESSION["flash"]))
+      %div.alert.alert-success.text-center{ "role" => "alert" }
+        %button.close{"data-dismiss" => "alert", "type"=> "button"}
+          %span{"aria-hidden" => "true"}
+            &times;
+        = $_SESSION["flash"]
+        - unset($_SESSION["flash"])
     .container
       %nav{:class => "navbar navbar-default", :role => "navigation"}
         .container-fluid

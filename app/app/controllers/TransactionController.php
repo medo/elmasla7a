@@ -26,7 +26,7 @@ class TransactionController extends BaseController{
     $transaction->date = date("Y-m-d H:i:s");
     $item->save();
     $transaction->save();
-    
+    $this->addFlash("Item bought successfully!");
     return $this->redirect("Site", "index");
   }
 

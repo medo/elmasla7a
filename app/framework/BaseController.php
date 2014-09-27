@@ -101,4 +101,8 @@ abstract class BaseController{
     return $this->$action($this->params);
   }
 
+  function addFlash($message){
+    $_SESSION["flash"] = $message;
+  }
+
 }
