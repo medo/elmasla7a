@@ -1,0 +1,9 @@
+%h1 Items
+%hr
+- for($i=0;$i<count($items)/4;$i++)
+  %div.row
+    - for($j=0;$j<4;$j++)
+      %div.col-md-3
+        - $ind = $i*4 + $j
+        - if( $ind < count($items) )
+          = $controller->renderPartial("item.html.haml", array("item" => $items[$ind]));

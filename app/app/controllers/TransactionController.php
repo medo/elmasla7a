@@ -4,30 +4,39 @@ class TransactionController extends BaseController{
 
   function buyAction($params) {
     $itemId = $params["itemId"];
-    $userId = $this->signedInUser()->getId();
-  	$item = Item::findById(array("id" => $itemId));
-  	
-    if($item->getQuantity() != 0) {  
-    return $this->render("buy.html.haml", array("item" => $item));
-  	}
+    $item = Item::model()->find($itemId);
+    if($item->quantity != 0) {
+      return $this->render("buy.html.haml", array("item" => $item));
+    }else{
+      $this->redirect("Site","index");
+    }
   }
 
   function checkoutAction($params) {
-    $userId = $this->signedInUser()->getId();
-  	$item = $params["item"];
-    $item->setQuantity($item->getQuantity()--);
+    if($this->isGuest()){
+      $this->redirect("Site","login");
+    }
+    $userId = $this->signedInUser()->id;
+    $itemId = $params["itemId"];
+    $item = Item::model()->find($itemId);
+    $item->quantity--;
     $transaction = new Transaction();
-    $transaction->setUserId($userId);
-    $transaction->setItemId($item->getId());
-    $transaction->save();
+    $transaction->userId = $userId;
+    $transaction->itemId = $item->id;
+    $transaction->date = date("Y-m-d H:i:s");
     $item->save();
+    $transaction->save();
     
     return $this->redirect("Site", "index");
   }
 
-  function historyAction(int $userId) {
-    $boughtItems = Transaction::findById(array("userId" => $userId, "bought" => true));
-    
-    return $this->render("history.html.haml", array("boughtItems" => $boughtItems));
+  function historyAction() {
+    $userId = $this->signedInUser()->id;
+    if($this->isGuest()){
+      $this->redirect("Site","login");
+    }
+    $boughtItems = Transaction::model()->findAll(array("userId" => $userId));
+    $items = array_map(function($tran){ return $tran->getItem(); }, $boughtItems);
+    return $this->render("history.html.haml", array("items" => $items));
   }
 }

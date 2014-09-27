@@ -18,6 +18,10 @@ abstract class BaseController{
     return $this->render($templateName, $variables, false);
   }
 
+  function getPath($controller, $action){
+    return Routes::getPath($controller, $action, false);
+  }
+
   function redirect($controller, $action){
     header("Location: ".Routes::getPath($controller, $action));
     die();
@@ -69,7 +73,7 @@ abstract class BaseController{
   private function authenticateUser(){
     if( isset($_SESSION['userId'])){
       $userId = $_SESSION['userId'];
-      $user = Users::findById($userId);
+      $user = User::model()->find($userId);
       if( $user ){
         $this->_user = $user;
       }else{

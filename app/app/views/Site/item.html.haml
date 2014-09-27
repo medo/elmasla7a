@@ -1,0 +1,20 @@
+%div.box
+  %div.row
+    %img.col-md-12.box{ "src" => "#{$item->imagePath}" }
+  %div.row
+    %span.col-md-12
+      = $item->name;
+  %div.row
+    %b.col-md-12
+      = "$item->price EGP";
+  %div.row
+    - if( $item->quantity == 0 )
+      %button.btn.btn-default.col-md-12{ "disabled" => "true" }
+        SOLD OUT!
+    -else
+      %a{ "href" => "#{$controller->getPath("Transaction","buy")}?itemId=#{$item->id}"}
+        %button.btn.btn-success.col-md-12
+          = "Buy Now ( ONLY $item->quantity LEFT )"
+
+  
+

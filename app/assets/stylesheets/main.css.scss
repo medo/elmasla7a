@@ -1,2 +1,9 @@
-$color: #abc;
-div { color: lighten($color, 20%); }
+.box{
+  padding: 10px !important;
+  text-align: center;
+
+  a{
+    text-decoration:none;
+    color: white;
+  }
+}

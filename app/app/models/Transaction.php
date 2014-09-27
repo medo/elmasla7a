@@ -3,15 +3,19 @@
 class Transaction extends BaseModel {
 
   function __construct() {
-    parent::__construct("transactions");
+    parent::__construct("transactions", "Transaction");
+  }
+
+  public static function model(){
+    return new self();
   }
 
   public function getUser(){
-    return User::find($this->getUserId());
+    return User::model()->find($this->userId);
   }
 
   public function getItem(){
-    return Item::find($this->getItemId());
+    return Item::model()->find($this->itemId);
   }
 
 }

@@ -9,8 +9,12 @@ class Routes{
     return self::$routes;
   }
 
-  public static function getPath($controller, $action){
-    return $_SERVER['REMOTE_HOST'].self::$routes_inverse[$controller."_".$action];
+  public static function getPath($controller, $action, $absolute = true){
+    if($absolute){
+      return $_SERVER['REMOTE_HOST'].self::$routes_inverse[$controller."_".$action];
+    }else{
+      return self::$routes_inverse[$controller."_".$action];
+    }
   }
 
   public function addRoute($path, $httpMethod, $controller, $action, $format = "html"){
@@ -20,10 +24,13 @@ class Routes{
 }
 
 Routes::addRoute("/", "GET", "Site", "index");
-Routes::addRoute("/cart", "GET", "Cart", "index");
-Routes::addRoute("/cart/buy", "POST", "Cart", "buy");
-Routes::addRoute("/cart/history", "GET", "Cart", "history");
-Routes::addRoute("/cart/checkout", "POST", "Cart", "checkout");
+Routes::addRoute("/login", "GET", "Site", "login");
+Routes::addRoute("/register", "GET", "Site", "register");
+Routes::addRoute("/cart/buy", "GET", "Transaction", "buy");
+Routes::addRoute("/cart/checkout", "POST", "Transaction", "checkout");
+Routes::addRoute("/cart/history", "GET", "Transaction", "history");
 Routes::addRoute("/user/register", "POST", "User", "register");
 Routes::addRoute("/user/login", "POST", "User", "login");
 Routes::addRoute("/user/logout", "POST", "User", "logout");
+Routes::addRoute("/user/edit", "GET", "User", "edit");
+Routes::addRoute("/user/save", "POST", "User", "save");

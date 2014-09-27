@@ -1,0 +1,13 @@
+%h1 Your History
+%hr
+-if(count($items) == 0)
+  %h2.text-center
+    You haven't bought any item yet.
+-else
+  - for($i=0;$i<count($items)/4;$i++)
+    %div.row
+      - for($j=0;$j<4;$j++)
+        %div.col-md-3
+          - $ind = $i*4 + $j
+          - if( $ind < count($items) )
+            = $controller->renderPartial("item.html.haml", array("item" => $items[$ind]));
