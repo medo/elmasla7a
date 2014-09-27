@@ -4,12 +4,10 @@
 -if($message)
   %h4.text-center
     Wrong credentials.
-%form{"method"=>"POST", "action" => "#{$controller->getPath("Site","postLogin",false)}"}
-  .row
-    %label.control-label.col-md-1 Email
-    %input{"required" =>"true", "type" => "textbox", "placeholder" => "john@doe.com", "name" => "email"}
-  .row
-    %label.control-label.col-md-1 Password
-    %input{"required" =>"true", "type" => "password", "name" => "password"}
-  .row
-    %input.btn.btn-success.col-md-offset-2{"type" => "submit", "value" => "login"}
+%form.row.text-center{"method"=>"POST", "action" => "#{$controller->getPath("Site","postLogin",false)}", "role" => "form"}
+  .row.form-group.col-md-4.col-md-offset-4
+    %input.form-control{"required" =>"true", "type" => "text", "placeholder" => "Username", "name" => "email"}
+  .row.form-group.col-md-4.col-md-offset-4
+    %input.form-control{"required" =>"true", "type" => "password", "name" => "password", "placeholder" => "Password"}
+  .row.form-group.col-md-4.col-md-offset-4
+    %input.btn.btn-success{"type" => "submit", "value" => "login"}
