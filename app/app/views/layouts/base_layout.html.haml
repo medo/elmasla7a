@@ -11,15 +11,20 @@
         .container-fluid
           %ul.nav.navbar-nav
             %li
-              %a{:href => '/'} Home
+              %a{:href => "#{$controller->getPath("Site","index")}"} Home
             - if (!$controller->isGuest())
               %li
-                %a{:href => '/cart/history'} Transactions
+                %a{:href => "#{$controller->getPath("Transaction","history")}"} Transactions
           .pull-right.mts
             - if ($controller->isGuest())
-              %a{:href => "/login"} = 'Sign in'
+              %a{:href => "#{$controller->getPath("Site","login")}"} = 'Sign in'
+              = "  |  "
+              %a{:href => "#{$controller->getPath("Site","register")}"} = 'Register'
             - else
-              %a{:href => "/user/logout"} = "Sign out ($controller->signedInUser()->firstname)"
+              %a{:href => "#{$controller->getPath("User","edit")}"}
+                = $controller->signedInUser()->firstName
+              = " | "
+              %a{:href => "#{$controller->getPath("User","logout")}"} = "Sign out"
       .container-fluid
         = $layoutContent
 

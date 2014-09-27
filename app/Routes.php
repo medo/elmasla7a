@@ -26,6 +26,7 @@ class Routes{
 Routes::addRoute("/", "GET", "Site", "index");
 Routes::addRoute("/login", "GET", "Site", "login");
 Routes::addRoute("/register", "GET", "Site", "register");
+Routes::addRoute("/logout", "GET", "User", "logout");
 Routes::addRoute("/cart/buy", "GET", "Transaction", "buy");
 Routes::addRoute("/cart/checkout", "POST", "Transaction", "checkout");
 Routes::addRoute("/cart/history", "GET", "Transaction", "history");
@@ -33,5 +34,4 @@ Routes::addRoute("/user/register", "POST", "User", "register");
 Routes::addRoute("/postlogin", "POST", "Site", "postLogin");
 Routes::addRoute("/postregister", "POST", "Site", "postRegister");
 Routes::addRoute("/user/edit", "GET", "User", "edit");
-Routes::addRoute("/user/logout", "POST", "User", "logout");
 Routes::addRoute("/user/save", "POST", "User", "save");
